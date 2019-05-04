@@ -1,0 +1,16 @@
+{
+  "name": "vue-wechat-clone",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mokunshao/vue-wechat-clone.git",
+  "author": "mokunshao <1627510957@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.5.5"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  }
+}
