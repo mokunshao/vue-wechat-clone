@@ -48,7 +48,7 @@ router.post("/login", (req, res) => {
         throw err;
       }
       if (same) {
-        const payload = { id: user.id, email: user.email };
+        const payload = { id: user.id, email: user.email, avatar: user.avatar };
         jwt.sign(
           payload,
           keys.secretOrPrivateKey,

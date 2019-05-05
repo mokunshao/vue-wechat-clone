@@ -5,10 +5,16 @@ const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const user = require("./routes/api/user");
 const User = require("./models/User");
+const Moment = require("./models/Moment");
+const moment = require("./routes/api/moment");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
+
+// Moment.find().then(data => {
+//   console.log(data);
+// });
 
 app.use(passport.initialize());
 
@@ -35,6 +41,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api/user", user);
+app.use("/api/moment", moment);
+
 
 app.get("/", passport.authenticate("jwt", { session: false }), (req, res) => {
   res.json({ msg: req.user });
