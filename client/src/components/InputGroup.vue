@@ -1,7 +1,7 @@
 <template>
   <div class="inputGroup">
     <label :for="name">
-      <slot name="label">默认</slot>
+      <slot name="label"></slot>
     </label>
     <input
       :type="type"

@@ -7,9 +7,12 @@
           <template v-slot:label>邮箱</template>
         </InputGroup>
         <InputGroup placeholder="请填写密码" v-model="user.password" type="password">
-          <template v-slot:label>密码</template>     
+          <template v-slot:label>密码</template>
         </InputGroup>
       </form>
+      <YButton :disabled="isDisabled" @click="loginClick" class="button">
+        <template v-slot:default>登录</template>
+      </YButton>
     </div>
     <div class="footer">
       <button class="register" @click="$router.push('/register')">注册账号</button>
@@ -19,11 +22,13 @@
 
 <script>
 import InputGroup from "../components/InputGroup";
+import YButton from "../components/YButton";
 
 export default {
   name: "Login",
   components: {
-    InputGroup
+    InputGroup,
+    YButton
   },
   data() {
     return {
@@ -32,6 +37,23 @@ export default {
         password: ""
       }
     };
+  },
+  computed: {
+    isDisabled() {
+      if (this.user.email && this.user.password) {
+        return false;
+      }
+      return true;
+    }
+  },
+  methods: {
+    loginClick() {
+      const reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+      if (!reg.test(this.user.email)) {
+        alert("请输入合法的邮箱地址！");
+        return;
+      }
+    }
   }
 };
 </script>
@@ -45,6 +67,9 @@ export default {
     margin-top: 80px;
     font-size: 22px;
     text-align: center;
+  }
+  .button {
+    margin-top: 30px;
   }
   .footer {
     position: absolute;

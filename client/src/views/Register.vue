@@ -7,8 +7,8 @@
       <div class="title">注册账号</div>
       <div class="content">
         <form>
-          <InputGroup placeholder="请填写用户名" v-model="user.username">
-            <template v-slot:label>用户名</template>
+          <InputGroup placeholder="请填写昵称" v-model="user.username">
+            <template v-slot:label>昵称</template>
           </InputGroup>
           <InputGroup placeholder="请填写邮箱" v-model="user.email">
             <template v-slot:label>邮箱</template>
@@ -20,9 +20,9 @@
             <template v-slot:label>确认密码</template>
           </InputGroup>
         </form>
-      </div>
-      <div class="footer">
-        <button>注册</button>
+        <YButton :disabled="isDisabled" @click="registerClick" class="button">
+          <template v-slot:default>注册</template>
+        </YButton>
       </div>
     </div>
   </div>
@@ -30,11 +30,13 @@
 
 <script>
 import InputGroup from "../components/InputGroup";
+import YButton from "../components/YButton";
 
 export default {
   name: "Register",
   components: {
-    InputGroup
+    InputGroup,
+    YButton
   },
   data() {
     return {
@@ -45,6 +47,32 @@ export default {
         password2: ""
       }
     };
+  },
+  computed: {
+    isDisabled() {
+      if (
+        this.user.username &&
+        this.user.email &&
+        this.user.password &&
+        this.user.password2
+      ) {
+        return false;
+      }
+      return true;
+    }
+  },
+  methods: {
+    registerClick() {
+      const reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+      if (!reg.test(this.user.email)) {
+        alert("请输入合法的邮箱地址！");
+        return null;
+      }
+      if (this.user.password !== this.user.password2) {
+        alert("两次密码不一致！");
+        return null;
+      }
+    }
   }
 };
 </script>
@@ -70,6 +98,9 @@ export default {
       font-size: 22px;
       text-align: center;
     }
+  }
+  .button {
+    margin-top: 30px;
   }
 }
 </style>
