@@ -7,11 +7,22 @@ import {
   faComments,
   faAddressBook,
   faCompass,
-  faUser
+  faUser,
+  faChevronLeft,
+  faPlus,
+  faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faComments, faAddressBook, faCompass, faUser);
+library.add(
+  faComments,
+  faAddressBook,
+  faCompass,
+  faUser,
+  faChevronLeft,
+  faPlus,
+  faUserPlus
+);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
