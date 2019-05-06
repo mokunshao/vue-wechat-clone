@@ -7,7 +7,6 @@
 <style lang="scss">
 html,body,#app{
   height: 100%;
-  // background: yellowgreen;
   margin: 0;
 }
 

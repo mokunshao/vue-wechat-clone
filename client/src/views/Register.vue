@@ -16,7 +16,7 @@
           <InputGroup placeholder="请填写密码" v-model="user.password" type="password">
             <template v-slot:label>密码</template>
           </InputGroup>
-          <InputGroup placeholder="请确认密码" v-model="user.password2">
+          <InputGroup placeholder="请确认密码" v-model="user.password2" type="password">
             <template v-slot:label>确认密码</template>
           </InputGroup>
         </form>
@@ -72,6 +72,10 @@ export default {
         alert("两次密码不一致！");
         return null;
       }
+      this.$axios.post("/api/user/register", this.user).then(res => {
+        console.log(res);
+        this.$router.push("login");
+      });
     }
   }
 };

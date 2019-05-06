@@ -53,6 +53,10 @@ export default {
         alert("请输入合法的邮箱地址！");
         return;
       }
+      this.$axios.post("/api/user/login", this.user).then(res => {
+        localStorage.setItem("wxToken", res.data.token);
+        this.$router.push("/");
+      });
     }
   }
 };
