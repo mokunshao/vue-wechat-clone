@@ -9,8 +9,29 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      name: "Index",
-      component: () => import("./views/Index")
+      component: () => import("./views/Index"),
+      children: [
+        {
+          path:'',
+          redirect:'/chat'
+        },
+        {
+          path: "/chat",
+          name: "Chat",
+          component: () => import("./views/Chat")
+        },
+        {
+          path: "/contact",
+          name: "Contact",
+          component: () => import("./views/Contact")
+        },
+        {
+          path: "/discover",
+          name: "Discover",
+          component: () => import("./views/Discover")
+        },
+        { path: "/me", name: "Me", component: () => import("./views/Me") }
+      ]
     },
     {
       path: "/login",
@@ -21,21 +42,17 @@ const router = new Router({
       path: "/register",
       name: "Register",
       component: () => import("./views/Register")
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
     }
   ]
 });
 
-// router.beforeEach((to,from,next)=>{
-
-// })
+router.beforeEach((to, from, next) => {
+  const isLogin = localStorage.wxToken ? true : false;
+  if (to.path === "/login" || to.path === "/register") {
+    next();
+  } else {
+    isLogin ? next() : next("/login");
+  }
+});
 
 export default router;

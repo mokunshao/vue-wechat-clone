@@ -1,10 +1,9 @@
 <template>
-  <div class="home">
-  </div>
+  <div>聊天</div>
 </template>
 
 <script>
 export default {
-  name: 'home',
-};
+  name:'Chat'
+}
 </script>
