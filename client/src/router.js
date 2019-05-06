@@ -12,8 +12,8 @@ const router = new Router({
       component: () => import("./views/Index"),
       children: [
         {
-          path:'',
-          redirect:'/chat'
+          path: "",
+          redirect: "/chat"
         },
         {
           path: "/chat",
@@ -42,6 +42,11 @@ const router = new Router({
       path: "/register",
       name: "Register",
       component: () => import("./views/Register")
+    },
+    {
+      path: "/moments",
+      name: "Moments",
+      component: () => import("./views/Moments")
     }
   ]
 });
