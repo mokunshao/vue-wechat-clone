@@ -1,11 +1,11 @@
 <template>
   <header class="header">
-    <div class="headerLeft headerButton" v-if="hasLeft">
+    <div class="headerButton" v-if="hasLeft">
       <font-awesome-icon icon="chevron-left"/>
       <button @click="$router.go(-1)">返回</button>
     </div>
     <div class="headerTitle">{{title}}</div>
-    <div class="headerRight headerButton" v-if="btnIcon">
+    <div class="headerButton" v-if="btnIcon">
       <button @click="$emit('clickRight')">
         <font-awesome-icon :icon="btnIcon"/>
       </button>
@@ -57,12 +57,6 @@ export default {
   }
   .headerTitle {
     flex: 1;
-  }
-  .headerLeft {
-    text-align: left;
-  }
-  .headerRight {
-    text-align: right;
   }
 }
 </style>

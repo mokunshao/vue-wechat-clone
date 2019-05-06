@@ -9,6 +9,7 @@ import {
   faCompass,
   faUser,
   faChevronLeft,
+  faChevronRight,
   faPlus,
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +21,7 @@ library.add(
   faCompass,
   faUser,
   faChevronLeft,
+  faChevronRight,
   faPlus,
   faUserPlus
 );

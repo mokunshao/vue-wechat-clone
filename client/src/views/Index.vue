@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <router-view/>
-    <TabBar :data='tabBarData'/>
+  <div class="index">
+    <div class="content">
+      <router-view/>
+    </div>
+    <TabBar :data="tabBarData"/>
   </div>
 </template>
 
@@ -11,17 +13,27 @@ import TabBar from "../components/TabBar";
 export default {
   name: "Index",
   components: {
-    TabBar,
+    TabBar
   },
-  data(){
-    return{
-      tabBarData:[
-        {title:'微信',icon:'comments',path:'/chat'},
-        {title:'通讯录',icon:'address-book',path:'/contact'},
-        {title:'发现',icon:'compass',path:'/discover'},
-        {title:'我的',icon:'user',path:'/me'},
+  data() {
+    return {
+      tabBarData: [
+        { title: "微信", icon: "comments", path: "/chat" },
+        { title: "通讯录", icon: "address-book", path: "/contact" },
+        { title: "发现", icon: "compass", path: "/discover" },
+        { title: "我的", icon: "user", path: "/me" }
       ]
-    }
+    };
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.index {
+  height: calc(100% - 55px);
+  .content {
+    margin-top: 50px;
+    height: calc(100% - 50px);
+  }
+}
+</style>
