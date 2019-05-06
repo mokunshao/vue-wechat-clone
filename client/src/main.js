@@ -11,7 +11,8 @@ import {
   faChevronLeft,
   faChevronRight,
   faPlus,
-  faUserPlus
+  faUserPlus,
+  faCamera
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -23,7 +24,8 @@ library.add(
   faChevronLeft,
   faChevronRight,
   faPlus,
-  faUserPlus
+  faUserPlus,
+  faCamera
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
