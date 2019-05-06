@@ -26,7 +26,6 @@ export default {
 
 <style lang="scss" scoped>
 .tabBar {
-  height: 55px;
   box-sizing: border-box;
   width: 100%;
   position: fixed;
@@ -48,11 +47,10 @@ export default {
     padding: 7px 0;
     flex: 1;
     .tabItemIcon {
-      width: 24px;
-      height: 24px;
-      margin: 0 auto 5px;
-      i {
-        font-size: 1.3rem;
+      svg {
+        width: 24px;
+        height: 24px;
+        margin: 0 auto 5px;
       }
     }
     .tabItemLabel {
@@ -71,5 +69,4 @@ a {
 .isSelected {
   color: #20af0e;
 }
-
 </style>
