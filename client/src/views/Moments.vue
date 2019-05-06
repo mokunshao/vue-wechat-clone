@@ -1,6 +1,10 @@
 <template>
   <div class="moments">
-    <Header title="朋友圈" btnIcon="camera" :hasLeft="true" ></Header>
+    <Header title="朋友圈" btnIcon="camera" :hasLeft="true"></Header>
+    <div class="container">
+      <img :src="user.avatar" :alt="user.avatar">
+      {{user.username}}
+    </div>
   </div>
 </template>
 
@@ -13,12 +17,19 @@ export default {
   computed: {
     user() {
       const token = localStorage.wxToken;
-      const decode = jwt_decode(token);
-      return decode;
+      const decoded = jwt_decode(token);
+      console.log(decoded);
+      return decoded;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.container {
+  width: 100%;
+  height: calc(100% - 50px);
+  padding-top: 50px;
+  overflow: auto;
+}
 </style>

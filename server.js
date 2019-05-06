@@ -12,10 +12,6 @@ const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 
-// Moment.find().then(data => {
-//   console.log(data);
-// });
-
 app.use(passport.initialize());
 
 const opts = {};
@@ -42,11 +38,6 @@ app.use(bodyParser.json());
 
 app.use("/api/user", user);
 app.use("/api/moment", moment);
-
-
-app.get("/", passport.authenticate("jwt", { session: false }), (req, res) => {
-  res.json({ msg: req.user });
-});
 
 mongoose
   .connect(keys.mongoURI, { useNewUrlParser: true })
