@@ -2,17 +2,19 @@
   <div class="moments">
     <Header title="朋友圈" btnIcon="camera" :hasLeft="true" class="header"></Header>
     <div class="container">
-      <div class="headWrapper">
-        <div class="userInfo">
-          <span class="username">{{user.username}}</span>
-          <div class="userImg">
-            <img :src="user.avatar" :alt="user.username">
+      <Scroll>
+        <div class="headWrapper">
+          <div class="userInfo">
+            <span class="username">{{user.username}}</span>
+            <div class="userImg">
+              <img :src="user.avatar" :alt="user.username">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="contentWrapper">
-        <CellView v-for="(moment,index) in momentsList" :key="index" :momentsObj="moment"/>
-      </div>
+        <div class="contentWrapper" style="height:1000px;">
+          <CellView v-for="(moment,index) in momentsList" :key="index" :momentsObj="moment"/>
+        </div>
+      </Scroll>
     </div>
   </div>
 </template>
@@ -20,11 +22,12 @@
 <script>
 import Header from "../components/Header";
 import CellView from "../components/CellView";
+import Scroll from "../components/Scroll";
 import jwt_decode from "jwt-decode";
 
 export default {
   name: "Moments",
-  components: { Header, CellView },
+  components: { Header, CellView, Scroll },
   data() {
     return {
       momentsList: {}
@@ -59,7 +62,7 @@ export default {
   .container {
     height: calc(100% - 50px);
     padding-top: 50px;
-    overflow: auto;
+    // overflow: hidden;
     .headWrapper {
       position: relative;
       height: 200px;
