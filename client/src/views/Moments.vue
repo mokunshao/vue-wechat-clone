@@ -2,7 +2,7 @@
   <div class="moments">
     <Header title="朋友圈" btnIcon="camera" :hasLeft="true" class="header"></Header>
     <div class="container">
-      <Scroll ref="scroll" @pulldown="getLatestData">
+      <Scroll ref="scroll" @pulldown="getLatestData" @pullup="loadMore">
         <div class="headWrapper">
           <div class="userInfo">
             <span class="username">{{user.username}}</span>
@@ -11,7 +11,7 @@
             </div>
           </div>
         </div>
-        <div class="contentWrapper" style="height:1000px;">
+        <div class="contentWrapper">
           <CellView v-for="(moment,index) in momentsList" :key="index" :momentsObj="moment"/>
         </div>
       </Scroll>
@@ -30,7 +30,9 @@ export default {
   components: { Header, CellView, Scroll },
   data() {
     return {
-      momentsList: {}
+      momentsList: {},
+      page: 2,
+      size: 3
     };
   },
   computed: {
@@ -45,6 +47,20 @@ export default {
       this.$axios("/api/moment/latest").then(res => {
         this.momentsList = res.data;
         this.$refs.scroll.$emit("refreshEnd");
+      });
+      this.page = 2;
+    },
+    loadMore() {
+      this.$axios.get(`/api/moment/${this.page}/${this.size}`).then(res => {
+        const result = [...res.data];
+        if (result.length > 0) {
+          result.forEach(item => {
+            this.momentsList.push(item);
+          });
+          this.page++;
+        } else {
+          this.$refs.scroll.$emit("loadedDone");
+        }
       });
     }
   },
