@@ -29,18 +29,32 @@ export default {
     };
   },
   methods: {
+    reset() {
+      setTimeout(() => {
+        this.dragTip = {
+          text: "下拉刷新",
+          showLoading: false
+        };
+      }, 500);
+    },
     initScroll() {
       this.scroll = new BScroll(this.$refs.wrapper, {
         probeType: 1
       });
-      // this.scroll.on("scroll", pos => {
-      //   // 显示下拉刷新loading
-      //   this.dragTip.showLoading = true;
-
-      //   if (pos.y > 50) {
-      //     this.dragTip.text = "释放刷新";
-      //   }
-      // });
+      this.scroll.on("scroll", pos => {
+        this.dragTip.showLoading = true;
+        if (pos.y > 30) {
+          this.dragTip.text = "释放刷新";
+        }
+      });
+      this.scroll.on("touchEnd", pos => {
+        this.dragTip.showLoading = false;
+        if (pos.y > 30) {
+          this.dragTip.text = "刷新中...";
+          this.$emit("pulldown");
+          this.$on("refreshEnd", this.reset);
+        }
+      });
     }
   },
   mounted() {
@@ -52,35 +66,31 @@ export default {
 <style lang="scss" scoped>
 .scroll-wrap {
   height: 100%;
-}
-
-.fl {
-  display: inline-block;
-}
-.fl img {
-  vertical-align: middle;
-  margin-right: 0.2rem;
-}
-/* 下拉刷新 */
-.pulldown,
-.pullup {
-  width: 100%;
-  height: 50px;
-  position: relative;
-  color: #888;
-}
-.clear {
-  padding: 10px 0px;
-  font-size: 0.28rem;
-  position: absolute;
-  left: 50%;
-  top: 5px;
-  transform: translate(-50%, 0);
-}
-
-.list-donetip {
-  text-align: center;
-  line-height: 50px;
-  font-size: 0.28rem;
+  .pulldown,
+  .pullup {
+    height: 50px;
+    position: relative;
+    color: #888;
+  }
+  .clear {
+    padding: 10px 0px;
+    font-size: 0.28rem;
+    position: absolute;
+    left: 50%;
+    top: 5px;
+    transform: translate(-50%, 0);
+    .fl {
+      display: inline-block;
+      img {
+        vertical-align: middle;
+        margin-right: 0.2rem;
+      }
+    }
+  }
+  // .list-donetip {
+  //   text-align: center;
+  //   line-height: 50px;
+  //   font-size: 0.28rem;
+  // }
 }
 </style>

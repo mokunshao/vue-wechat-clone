@@ -2,7 +2,7 @@
   <div class="moments">
     <Header title="朋友圈" btnIcon="camera" :hasLeft="true" class="header"></Header>
     <div class="container">
-      <Scroll>
+      <Scroll ref="scroll" @pulldown="getLatestData">
         <div class="headWrapper">
           <div class="userInfo">
             <span class="username">{{user.username}}</span>
@@ -44,6 +44,7 @@ export default {
     getLatestData() {
       this.$axios("/api/moment/latest").then(res => {
         this.momentsList = res.data;
+        this.$refs.scroll.$emit("refreshEnd");
       });
     }
   },
