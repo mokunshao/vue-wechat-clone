@@ -27,9 +27,9 @@ export default {
 <style lang="scss" scoped>
 .tabBar {
   box-sizing: border-box;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
+  // width: 100%;
+  // position: fixed;
+  // bottom: 0;
   background-image: linear-gradient(
     180deg,
     #d9d9d9,

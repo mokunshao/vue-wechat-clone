@@ -1,15 +1,13 @@
  <template>
-  <div>
-    <button
-      class="yButton"
-      :class="{'isDisabled':disabled}"
-      :type="type"
-      :disabled="disabled"
-      @click="$emit('click')"
-    >
-      <slot></slot>
-    </button>
-  </div>
+  <button
+    class="yButton"
+    :class="{'isDisabled':disabled}"
+    :type="type"
+    :disabled="disabled"
+    @click="$emit('click')"
+  >
+    <slot></slot>
+  </button>
 </template>
  
 
@@ -20,7 +18,7 @@ export default {
     type: String,
     disabled: {
       type: Boolean,
-      default: true
+      default: false
     }
   }
 };

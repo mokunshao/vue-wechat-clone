@@ -28,3 +28,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.discover {
+  height: 100%;
+  .content {
+    flex: 1;
+  }
+}
+</style>

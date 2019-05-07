@@ -30,10 +30,16 @@ export default {
 
 <style lang="scss" scoped>
 .index {
-  height: calc(100% - 55px);
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  // height: calc(100% - 57px);
   .content {
-    margin-top: 50px;
-    height: calc(100% - 50px);
+    flex: 1;
+    // display: flex;
+    // flex-direction: column;
+    // margin-top: 50px;
+    // height: calc(100% - 50px);
   }
 }
 </style>

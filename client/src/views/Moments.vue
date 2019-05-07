@@ -1,6 +1,6 @@
 <template>
   <div class="moments">
-    <Header title="朋友圈" btnIcon="camera" :hasLeft="true"></Header>
+    <Header title="朋友圈" btnIcon="camera" :hasLeft="true" class="header"></Header>
     <div class="container">
       <div class="headWrapper">
         <div class="userInfo">
@@ -53,6 +53,9 @@ export default {
 <style lang="scss" scoped>
 .moments {
   height: 100%;
+  .header {
+    position: fixed;
+  }
   .container {
     height: calc(100% - 50px);
     padding-top: 50px;
@@ -83,9 +86,6 @@ export default {
           color: white;
         }
       }
-    }
-    .contentWrapper {
-      // margin-top: 30px;
     }
   }
 }
