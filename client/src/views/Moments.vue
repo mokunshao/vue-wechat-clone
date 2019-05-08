@@ -1,6 +1,6 @@
 <template>
   <div class="moments">
-    <Header title="朋友圈" btnIcon="camera" :hasLeft="true" class="header"></Header>
+    <Header title="朋友圈" btnIcon="camera" :hasLeft="true" class="header" @clickRight="$router.push('/publish')"></Header>
     <div class="container">
       <Scroll ref="scroll" @pulldown="getLatestData" @pullup="loadMore">
         <div class="headWrapper">

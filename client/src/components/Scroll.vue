@@ -17,7 +17,7 @@
             <div class="fl">加载中...</div>
           </div>
         </div>
-        <div class="list-donetip" v-else>
+        <div class="doneTip" v-else>
           <slot name="doneTip">没有更多数据</slot>
         </div>
       </div>
@@ -69,7 +69,7 @@ export default {
         }
       });
       this.scroll.on("scrollEnd", () => {
-        if (this.scroll.y <= this.scroll.maxScrollY + 50) {
+        if (this.scroll.y <= this.scroll.maxScrollY) {
           this.$emit("pullup");
           this.$on("loadedDone", () => {
             this.isDone = true;
@@ -107,7 +107,7 @@ export default {
         }
       }
     }
-    .list-donetip {
+    .doneTip {
       text-align: center;
       line-height: 50px;
       font-size: 0.28rem;
