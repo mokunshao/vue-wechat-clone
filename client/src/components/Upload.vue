@@ -55,7 +55,7 @@ export default {
 .isImg {
   box-sizing: border-box;
   width: 30%;
-  height: 6rem;
+  max-height: 6rem;
   float: left;
   margin-right: 8px;
   margin-bottom: 8px;
