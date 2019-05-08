@@ -1,6 +1,12 @@
 <template>
   <div class="moments">
-    <Header title="朋友圈" btnIcon="camera" :hasLeft="true" class="header" @clickRight="$router.push('/publish')"></Header>
+    <Header
+      title="朋友圈"
+      btnIcon="camera"
+      :hasLeft="true"
+      class="header"
+      @clickRight="$router.push('/publish')"
+    ></Header>
     <div class="container">
       <Scroll ref="scroll" @pulldown="getLatestData" @pullup="loadMore">
         <div class="headWrapper">
@@ -16,10 +22,12 @@
         </div>
       </Scroll>
     </div>
+    <Loading :loading="loading"/>
   </div>
 </template>
 
 <script>
+import Loading from "../components/Loading";
 import Header from "../components/Header";
 import CellView from "../components/CellView";
 import Scroll from "../components/Scroll";
@@ -27,12 +35,13 @@ import jwt_decode from "jwt-decode";
 
 export default {
   name: "Moments",
-  components: { Header, CellView, Scroll },
+  components: { Loading, Header, CellView, Scroll },
   data() {
     return {
       momentsList: {},
       page: 2,
-      size: 3
+      size: 3,
+      loading: false
     };
   },
   computed: {
@@ -44,24 +53,30 @@ export default {
   },
   methods: {
     getLatestData() {
+      this.loading = true;
       this.$axios("/api/moment/latest").then(res => {
+        this.loading = false;
         this.momentsList = res.data;
         this.$refs.scroll.$emit("refreshEnd");
       });
       this.page = 2;
     },
     loadMore() {
-      this.$axios.get(`/api/moment/${this.page}/${this.size}`).then(res => {
-        const result = [...res.data];
-        if (result.length > 0) {
-          result.forEach(item => {
-            this.momentsList.push(item);
-          });
-          this.page++;
-        } else {
-          this.$refs.scroll.$emit("loadedDone");
-        }
-      });
+      if (this.loading === false) {
+        this.loading = true;
+        this.$axios.get(`/api/moment/${this.page}/${this.size}`).then(res => {
+          this.loading = false;
+          const result = [...res.data];
+          if (result.length > 0) {
+            result.forEach(item => {
+              this.momentsList.push(item);
+            });
+            this.page++;
+          } else {
+            this.$refs.scroll.$emit("loadedDone");
+          }
+        });
+      }
     }
   },
   mounted() {

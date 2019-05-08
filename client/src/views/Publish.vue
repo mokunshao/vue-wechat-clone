@@ -10,22 +10,26 @@
       </div>
       <Upload @getImgs="getImgs"/>
     </div>
+    <Loading :loading="loading"/>
   </div>
 </template>
 
 <script>
 import Upload from "../components/Upload";
+import Loading from "../components/Loading";
 import jwt_decode from "jwt-decode";
 
 export default {
   name: "Publish",
   components: {
-    Upload
+    Upload,
+    Loading
   },
   data() {
     return {
       text: "",
-      imgs: []
+      imgs: [],
+      loading: false
     };
   },
   computed: {
@@ -37,6 +41,7 @@ export default {
   },
   methods: {
     publish() {
+      this.loading = true;
       let postData = {
         username: this.user.username,
         avatar: this.user.avatar,
@@ -44,6 +49,7 @@ export default {
         imgs: this.imgs.join("|")
       };
       this.$axios.post("/api/moment/add", postData).then(() => {
+        this.loading = false;
         this.$router.push("/moments");
       });
     },

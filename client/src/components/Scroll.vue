@@ -14,7 +14,7 @@
         <div class="clear" v-if="!isDone">
           <div class="fl">
             <img width="16" src="../assets/scroll_load.gif" alt>
-            <div class="fl">加载中...</div>
+            <div class="fl">上拉继续加载...</div>
           </div>
         </div>
         <div class="doneTip" v-else>
@@ -71,15 +71,15 @@ export default {
       this.scroll.on("scrollEnd", () => {
         if (this.scroll.y <= this.scroll.maxScrollY) {
           this.$emit("pullup");
-          this.$on("loadedDone", () => {
-            this.isDone = true;
-          });
         }
       });
     }
   },
   mounted() {
     this.initScroll();
+    this.$on("loadedDone", () => {
+      this.isDone = true;
+    });
   }
 };
 </script>
