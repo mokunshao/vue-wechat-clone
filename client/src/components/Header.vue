@@ -2,7 +2,7 @@
   <header class="header">
     <div class="headerButton" v-if="hasLeft">
       <font-awesome-icon icon="chevron-left"/>
-      <button @click="$router.go(-1)">返回</button>
+      <button @click="$router.push('/discover')">返回</button>
     </div>
     <div class="headerTitle">{{title}}</div>
     <div class="headerButton" v-if="btnIcon">

@@ -1,7 +1,7 @@
 <template>
   <div class="publish">
     <div class="header">
-      <button @click="$router.go(-1)">取消</button>
+      <button @click="$router.push('/moments')">取消</button>
       <button @click="publish">发表</button>
     </div>
     <div class="content">
