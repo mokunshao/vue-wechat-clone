@@ -17,7 +17,8 @@ export default {
   name: "Upload",
   data() {
     return {
-      showFileData: []
+      showFileData: [],
+      allUploadFiles: []
     };
   },
   methods: {
@@ -25,6 +26,8 @@ export default {
       this.showFileData.forEach((item, index) => {
         if (img === item) {
           this.showFileData.splice(index, 1);
+          this.allUploadFiles.splice(index, 1);
+          this.$emit("getImgs", this.allUploadFiles);
         }
       });
     },
@@ -35,12 +38,14 @@ export default {
         return null;
       }
       files.forEach(item => {
+        this.allUploadFiles.push(item);
         const reader = new FileReader();
         reader.readAsDataURL(item);
         reader.onload = () => {
           this.showFileData.push(reader.result);
         };
       });
+      this.$emit("getImgs", this.allUploadFiles);
     }
   }
 };

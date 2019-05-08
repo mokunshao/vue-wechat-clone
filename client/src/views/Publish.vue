@@ -8,13 +8,15 @@
       <div class="text_wrap">
         <textarea placeholder="说说你的感受..." v-model="text"></textarea>
       </div>
-      <Upload/>
+      <Upload @getImgs="getImgs"/>
     </div>
   </div>
 </template>
 
 <script>
 import Upload from "../components/Upload";
+import jwt_decode from "jwt-decode";
+
 export default {
   name: "Publish",
   components: {
@@ -22,11 +24,39 @@ export default {
   },
   data() {
     return {
-      text: ""
+      text: "",
+      imgs: []
     };
   },
+  computed: {
+    user() {
+      var token = localStorage.wxToken;
+      var decoded = jwt_decode(token);
+      return decoded;
+    }
+  },
   methods: {
-    publish() {}
+    publish() {
+      let postData = {
+        username: this.user.username,
+        avatar: this.user.avatar,
+        text: this.text,
+        imgs: this.imgs.join("|")
+      };
+      this.$axios.post("/api/moment/add", postData).then(() => {
+        this.$router.push("/moments");
+      });
+    },
+    getImgs(imgs) {
+      this.imgs = [];
+      imgs.forEach(img => {
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = () => {
+          this.imgs.push(reader.result);
+        };
+      });
+    }
   }
 };
 </script>

@@ -6,16 +6,16 @@ const passport = require("passport");
 // @route POST /api/moment/add
 // @desc 添加朋友圈动态
 // @access private
-router.get(
+router.post(
   "/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const dataFromUser = {};
-    if (req.body.img) {
-      dataFromUser.img = req.body.img;
+    if (req.body.avatar) {
+      dataFromUser.avatar = req.body.avatar;
     }
-    if (req.body.name) {
-      dataFromUser.name = req.body.name;
+    if (req.body.username) {
+      dataFromUser.username = req.body.username;
     }
     if (req.body.text) {
       dataFromUser.text = req.body.text;

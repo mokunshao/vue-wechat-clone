@@ -1,13 +1,13 @@
 <template>
   <div class="cellWrapper">
     <div class="imgWrapper">
-      <img :src="momentsObj.img" alt>
+      <img :src="momentsObj.avatar" alt>
     </div>
     <div class="contentWrapper">
-      <div class="cellName">{{momentsObj.name}}</div>
+      <div class="cellName">{{momentsObj.username}}</div>
       <div class="cellText" v-if="momentsObj.text">{{momentsObj.text}}</div>
       <div class="cellImgs" v-if="momentsObj.imgs.length > 0">
-        <img v-for="(item,index) in momentsObj.imgs" :key="index" :src="item" alt>
+        <img v-for="(item,index) in momentsObj.imgs" :key="index" :src="item" alt="img">
       </div>
     </div>
   </div>

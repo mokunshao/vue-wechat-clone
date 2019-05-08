@@ -5,11 +5,11 @@ const momentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  img: {
+  avatar: {
     type: String,
     required: true
   },
-  name: {
+  username: {
     type: String,
     required: true
   },
