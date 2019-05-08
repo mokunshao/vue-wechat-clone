@@ -8,13 +8,18 @@
       <div class="text_wrap">
         <textarea placeholder="说说你的感受..." v-model="text"></textarea>
       </div>
+      <Upload/>
     </div>
   </div>
 </template>
 
 <script>
+import Upload from "../components/Upload";
 export default {
   name: "Publish",
+  components: {
+    Upload
+  },
   data() {
     return {
       text: ""
