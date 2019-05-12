@@ -2,7 +2,7 @@
   <div class="profile">
     <Header title="详细资料" :hasLeft="true" btnIcon="ellipsis-h" goBackTo="/contact"/>
     <div class="container">
-      <ProfileCell :user="{username:111,avatar:''}"/>
+      <ProfileCell :user="targetUser"/>
       <YButton>
         <template v-slot:default>发送消息</template>
       </YButton>
@@ -21,6 +21,11 @@ export default {
     Header,
     ProfileCell,
     YButton
+  },
+  computed: {
+    targetUser() {
+      return this.$store.getters.targetUser;
+    }
   }
 };
 </script>

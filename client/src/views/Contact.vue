@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     cellClick(friend) {
+      this.$store.dispatch("setTargetUser", friend);
       this.$router.push("/profile");
     },
     getFriendList() {
@@ -66,7 +67,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store)
     this.getFriendList();
   }
 };
