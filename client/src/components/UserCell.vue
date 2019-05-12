@@ -12,7 +12,8 @@
 export default {
   name: "UserCell",
   props: {
-    user: Object
+    user: Object,
+    count: Number
   }
 };
 </script>
