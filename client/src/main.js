@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import store from './store'
 import http from "./http";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -13,7 +14,8 @@ import {
   faPlus,
   faUserPlus,
   faCamera,
-  faSearch
+  faSearch,
+  faEllipsisH
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -27,7 +29,8 @@ library.add(
   faPlus,
   faUserPlus,
   faCamera,
-  faSearch
+  faSearch,
+  faEllipsisH
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
@@ -38,5 +41,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

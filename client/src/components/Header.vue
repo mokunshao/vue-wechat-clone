@@ -2,7 +2,7 @@
   <header class="header">
     <div class="headerButton" v-if="hasLeft">
       <font-awesome-icon icon="chevron-left"/>
-      <button @click="$router.push('/discover')">返回</button>
+      <button @click="$router.push(goBackTo)">返回</button>
     </div>
     <div class="headerTitle">{{title}}</div>
     <div class="headerButton" v-if="btnIcon">
@@ -22,7 +22,8 @@ export default {
       type: Boolean,
       default: false
     },
-    btnIcon: String
+    btnIcon: String,
+    goBackTo: { type: String, default: "/" }
   }
 };
 </script>
@@ -41,8 +42,6 @@ export default {
   position: relative;
   text-align: center;
   white-space: nowrap;
-  // position: fixed;
-  // top: 0;
   width: 100%;
   z-index: 99;
   .headerButton button {

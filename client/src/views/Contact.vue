@@ -3,13 +3,21 @@
     <Header title="通讯录" btnIcon="user-plus"/>
     <div class="container">
       <div class="searchWrap">
-        <div class="sear_content">
+        <div class="searchContent">
           <font-awesome-icon class="icon" icon="search"/>
           <input type="text" placeholder="搜索" v-model="searchValue">
         </div>
       </div>
       <div class="contentWrap">
-        <UserCell v-for="friend in friendList" :key="friend._id" :user="friend"/>
+        <UserCell
+          @click="cellClick(friend)"
+          v-for="friend in friendList"
+          :key="friend._id"
+          :user="friend"
+        />
+      </div>
+      <div class="countWrap">
+        <span>{{friendList.length}}位联系人</span>
       </div>
     </div>
   </div>
@@ -27,18 +35,38 @@ export default {
   },
   data() {
     return {
+      allFriends: [],
       friendList: [],
       searchValue: ""
     };
   },
   methods: {
+    cellClick(friend) {
+      this.$router.push("/profile");
+    },
     getFriendList() {
-      this.$axios
-        .get("/api/user/all")
-        .then(res => (this.friendList = res.data));
+      this.$axios.get("/api/user/all").then(res => {
+        this.allFriends = res.data;
+        this.friendList = res.data;
+      });
+    },
+    filterData() {
+      this.friendList = this.allFriends.filter(friend => {
+        return (
+          friend.username
+            .toLowerCase()
+            .indexOf(this.searchValue.toLowerCase()) !== -1
+        );
+      });
+    }
+  },
+  watch: {
+    searchValue() {
+      this.filterData();
     }
   },
   mounted() {
+    console.log(this.$store)
     this.getFriendList();
   }
 };
@@ -54,7 +82,7 @@ export default {
       background-color: #f1f1f1;
       box-sizing: border-box;
       padding: 8px;
-      .sear_content {
+      .searchContent {
         height: 40px;
         background: #fff;
         padding: 0 10px;
@@ -74,6 +102,15 @@ export default {
           font-size: 14px;
         }
       }
+    }
+    .countWrap {
+      min-height: 50px;
+      box-sizing: border-box;
+      color: #888;
+      font-size: 16px;
+      width: 100%;
+      line-height: 50px;
+      text-align: center;
     }
   }
 }

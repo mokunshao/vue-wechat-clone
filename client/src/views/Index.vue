@@ -33,6 +33,7 @@ export default {
   display: flex;
   height: 100%;
   flex-direction: column;
+  background: #f1f1f1;
   // height: calc(100% - 57px);
   .content {
     flex: 1;

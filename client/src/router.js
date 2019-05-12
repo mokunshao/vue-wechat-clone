@@ -30,7 +30,12 @@ const router = new Router({
           name: "Discover",
           component: () => import("./views/Discover")
         },
-        { path: "/me", name: "Me", component: () => import("./views/Me") }
+        { path: "/me", name: "Me", component: () => import("./views/Me") },
+        {
+          path: "/profile",
+          name: "Profile",
+          component: () => import("./views/Profile")
+        }
       ]
     },
     {

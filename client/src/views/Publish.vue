@@ -17,7 +17,6 @@
 <script>
 import Upload from "../components/Upload";
 import Loading from "../components/Loading";
-import jwt_decode from "jwt-decode";
 
 export default {
   name: "Publish",
@@ -34,9 +33,7 @@ export default {
   },
   computed: {
     user() {
-      var token = localStorage.wxToken;
-      var decoded = jwt_decode(token);
-      return decoded;
+      return this.$store.getters.user;
     }
   },
   methods: {

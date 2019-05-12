@@ -1,5 +1,5 @@
 <template>
-  <div class="cellWrapper" @click="emit('click')">
+  <div class="cellWrapper" @click="$emit('click')">
     <div class="cellTitle">
       <img :src="user.avatar" alt="avatar">
       <span v-show="count" class="badge">{{count}}</span>

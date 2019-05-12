@@ -23,6 +23,7 @@
 <script>
 import InputGroup from "../components/InputGroup";
 import YButton from "../components/YButton";
+import jwt_decode from "jwt-decode";
 
 export default {
   name: "Login",
@@ -55,6 +56,8 @@ export default {
       }
       this.$axios.post("/api/user/login", this.user).then(res => {
         localStorage.setItem("wxToken", res.data.token);
+        const decoded = jwt_decode(res.data.token);
+        this.$store.dispatch("setUser", decoded);
         this.$router.push("/");
       });
     }

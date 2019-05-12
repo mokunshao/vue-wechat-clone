@@ -4,6 +4,7 @@
       title="朋友圈"
       btnIcon="camera"
       :hasLeft="true"
+      goBackTo="/discover"
       class="header"
       @clickRight="$router.push('/publish')"
     ></Header>
@@ -31,7 +32,6 @@ import Loading from "../components/Loading";
 import Header from "../components/Header";
 import CellView from "../components/CellView";
 import Scroll from "../components/Scroll";
-import jwt_decode from "jwt-decode";
 
 export default {
   name: "Moments",
@@ -46,9 +46,7 @@ export default {
   },
   computed: {
     user() {
-      const token = localStorage.wxToken;
-      const decoded = jwt_decode(token);
-      return decoded;
+      return this.$store.getters.user;
     }
   },
   methods: {
