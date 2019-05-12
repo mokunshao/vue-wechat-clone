@@ -3,8 +3,8 @@
     <Header title="详细资料" :hasLeft="true" btnIcon="ellipsis-h" goBackTo="/contact"/>
     <div class="container">
       <ProfileCell :user="targetUser"/>
-      <YButton>
-        <template v-slot:default>发送消息</template>
+      <YButton @click="$router.push({name:'Chat',params:{user:targetUser}})">
+        <template v-slot:default>发消息</template>
       </YButton>
     </div>
   </div>

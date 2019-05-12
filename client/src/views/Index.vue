@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       tabBarData: [
-        { title: "微信", icon: "comments", path: "/chat" },
+        { title: "微信", icon: "comments", path: "/home" },
         { title: "通讯录", icon: "address-book", path: "/contact" },
         { title: "发现", icon: "compass", path: "/discover" },
         { title: "我的", icon: "user", path: "/me" }

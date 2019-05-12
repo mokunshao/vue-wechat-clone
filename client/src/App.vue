@@ -14,12 +14,6 @@ export default {
       const decoded = jwt_decode(localStorage.wxToken);
       this.$store.dispatch("setUser", decoded);
     }
-    if (localStorage.targetUser) {
-      this.$store.dispatch(
-        "setTargetUser",
-        JSON.parse(localStorage.targetUser)
-      );
-    }
   }
 };
 </script>

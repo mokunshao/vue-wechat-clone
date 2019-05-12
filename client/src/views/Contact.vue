@@ -43,7 +43,6 @@ export default {
   methods: {
     cellClick(friend) {
       this.$store.dispatch("setTargetUser", friend);
-      localStorage.setItem("targetUser", JSON.stringify(friend));
       this.$router.push("/profile");
     },
     getFriendList() {

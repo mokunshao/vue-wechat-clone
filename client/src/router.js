@@ -13,12 +13,12 @@ const router = new Router({
       children: [
         {
           path: "",
-          redirect: "/chat"
+          redirect: "/home"
         },
         {
-          path: "/chat",
-          name: "Chat",
-          component: () => import("./views/Chat")
+          path: "/home",
+          name: "Home",
+          component: () => import("./views/Home")
         },
         {
           path: "/contact",
@@ -35,8 +35,13 @@ const router = new Router({
           path: "/profile",
           name: "Profile",
           component: () => import("./views/Profile")
-        }
+        },
       ]
+    },
+    {
+      path: "/chat",
+      name: "Chat",
+      component: () => import("./views/Chat")
     },
     {
       path: "/login",
