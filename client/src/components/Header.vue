@@ -42,8 +42,8 @@ export default {
   text-align: center;
   white-space: nowrap;
   // position: fixed;
+  // top: 0;
   width: 100%;
-  top: 0;
   z-index: 99;
   .headerButton button {
     background-color: transparent;

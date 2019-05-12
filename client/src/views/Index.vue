@@ -36,6 +36,7 @@ export default {
   // height: calc(100% - 57px);
   .content {
     flex: 1;
+    overflow: auto;
     // display: flex;
     // flex-direction: column;
     // margin-top: 50px;
