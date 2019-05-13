@@ -43,7 +43,7 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
   User.findOne({ email }).then(user => {
     if (!user) {
-      return res.status(404).json({ msg: "用户不存在" });
+      return res.status(404).json("用户不存在");
     }
     bcrypt.compare(password, user.password, (err, same) => {
       if (err) {
@@ -68,7 +68,7 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        res.status(400).json({ msg: "密码错误" });
+        res.status(400).json("密码错误");
       }
     });
   });
@@ -119,7 +119,7 @@ router.get(
         let usersObj = {};
         usersObj = {
           name: user.name,
-          _id: user._id,
+          _id: user.id,
           email: user.email,
           avatar: user.avatar,
           date: user.date
@@ -129,11 +129,5 @@ router.get(
       .catch(err => res.status(404).json(err));
   }
 );
-
-// User.db.dropCollection('users')
-
-// User.find().then(data => {
-//   console.log(data);
-// });
 
 module.exports = router;

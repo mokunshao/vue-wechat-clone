@@ -50,6 +50,11 @@ array-flatten@1.1.1:
   resolved "https://registry.npm.taobao.org/array-flatten/download/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
   integrity sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=
 
+async-limiter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/async-limiter/download/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
+  integrity sha1-ePrtjD0HSrgfIrTphdeehzj3IPg=
+
 async@2.6.1:
   version "2.6.1"
   resolved "https://registry.npm.taobao.org/async/download/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
@@ -1688,6 +1693,13 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/wrappy/download/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+ws@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.npm.taobao.org/ws/download/ws-7.0.0.tgz#79351cbc3f784b3c20d0821baf4b4ff809ffbf51"
+  integrity sha1-eTUcvD94Szwg0IIbr0tP+An/v1E=
+  dependencies:
+    async-limiter "^1.0.0"
 
 y18n@^3.2.1:
   version "3.2.1"

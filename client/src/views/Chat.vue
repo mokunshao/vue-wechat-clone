@@ -3,12 +3,10 @@
     <Header :title="targetUser.username" :hasLeft="true" btnIcon="ellipsis-h" goBackTo="/contact"/>
     <div class="container">
       <div class="content_wrap" v-for="(item,index) in messageList" :key="index">
-        <!-- 别人的内容 -->
         <div class="left_msg" v-if="item.source == 'other'">
           <img :src="targetUser.avatar" alt="img">
           <span>{{item.msg}}</span>
         </div>
-        <!-- 我的内容 -->
         <div class="right_msg" v-if="item.source=='self'">
           <span>{{item.msg}}</span>
           <img :src="user.avatar" alt="img">
@@ -24,6 +22,7 @@
 
 <script>
 import Header from "../components/Header";
+import websocket from "../socket.js";
 
 export default {
   name: "Chat",
@@ -43,13 +42,40 @@ export default {
     };
   },
   methods: {
-    sendMessage() {},
+    saveMessage() {
+      let message = {
+        target: {
+          avatar: this.targetUser.avatar,
+          username: this.targetUser.username,
+          _id: this.targetUser._id
+        },
+        count: 0,
+        message: this.messageList,
+        user_id: this.user.id
+      };
+      this.$axios.post("/api/chat/addmsg", message).then(() => {
+        this.messageValue = "";
+      });
+    },
+    sendMessage() {
+      const msgObj = {
+        target: this.targetUser._id,
+        current: this.user.id,
+        msg: this.messageValue
+      };
+      websocket.send(msgObj);
+      this.messageList.push({
+        msg: this.messageValue,
+        source: "self"
+      });
+      this.saveMessage();
+      this.messageValue = "";
+    },
     getMessage() {
       this.$axios(`/api/chat/msg/${this.user.id}`).then(res => {
         let result = res.data.filter(data => {
           return data.target._id === this.targetUser._id;
         });
-        console.log(result);
         if (result.length > 0) {
           this.messageList = result[0].message;
         }
@@ -62,7 +88,16 @@ export default {
       vm.getMessage();
     });
   },
-  mounted() {}
+  mounted() {
+    websocket.init(
+      { user: this.user },
+      message => {
+        this.messageList.push({ msg: message.msg, source: "other" });
+        this.saveMessage();
+      },
+      error => console.log(error)
+    );
+  }
 };
 </script>
 

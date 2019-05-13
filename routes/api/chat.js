@@ -3,21 +3,17 @@ const router = express.Router();
 const passport = require("passport");
 const Chat = require("../../models/Chat");
 
-// $route  POST api/chat/addmsg
-// @desc   添加消息记录
-// @access private
 router.post(
   "/addmsg",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const chatFields = {};
-    // 判断用户是否存在
     Chat.findOne({ target: req.body.target, user_id: req.body.user_id }).then(
       chat => {
         if (!chat) {
           if (req.body.target) chatFields.target = req.body.target;
           if (req.body.user_id) chatFields.user_id = req.body.user_id;
-          chatFields.count = req.body.count;
+          if (req.body.count) chatFields.count = req.body.count;
           if (req.body.message) chatFields.message = req.body.message;
           new Chat(chatFields).save().then(chat => res.json(chat));
         } else {
@@ -30,9 +26,6 @@ router.post(
   }
 );
 
-// $route  GET api/chat/msg/:user_id
-// @desc   获取用户的所有消息记录
-// @access private
 router.get(
   "/msg/:user_id",
   passport.authenticate("jwt", { session: false }),

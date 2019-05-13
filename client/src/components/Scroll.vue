@@ -56,13 +56,13 @@ export default {
       });
       this.scroll.on("scroll", pos => {
         this.dragTip.showLoading = true;
-        if (pos.y > 30) {
+        if (pos.y > 50) {
           this.dragTip.text = "释放刷新";
         }
       });
       this.scroll.on("touchEnd", pos => {
         this.dragTip.showLoading = false;
-        if (pos.y > 30) {
+        if (pos.y > 50) {
           this.dragTip.text = "刷新中...";
           this.$emit("pulldown");
           this.$on("refreshEnd", this.reset);
@@ -71,6 +71,7 @@ export default {
       this.scroll.on("scrollEnd", () => {
         if (this.scroll.y <= this.scroll.maxScrollY) {
           this.$emit("pullup");
+          this.dragTip.showLoading = false;
         }
       });
     }
