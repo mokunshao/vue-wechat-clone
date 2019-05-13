@@ -1,10 +1,23 @@
 <template>
   <div class="chat" v-if="targetUser">
     <Header :title="targetUser.username" :hasLeft="true" btnIcon="ellipsis-h" goBackTo="/contact"/>
-    <div class="container">123</div>
+    <div class="container">
+      <div class="content_wrap" v-for="(item,index) in messageList" :key="index">
+        <!-- 别人的内容 -->
+        <div class="left_msg" v-if="item.source == 'other'">
+          <img :src="targetUser.avatar" alt="img">
+          <span>{{item.msg}}</span>
+        </div>
+        <!-- 我的内容 -->
+        <div class="right_msg" v-if="item.source=='self'">
+          <span>{{item.msg}}</span>
+          <img :src="user.avatar" alt="img">
+        </div>
+      </div>
+    </div>
     <div class="footerWrap">
-      <input type="text" v-model="msgValue">
-      <button :disabled="!msgValue" @click="sendMsg">发送</button>
+      <input type="text" v-model="messageValue">
+      <button :disabled="!messageValue" @click="sendMessage">发送</button>
     </div>
   </div>
 </template>
@@ -17,20 +30,39 @@ export default {
   components: {
     Header
   },
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    }
+  },
   data() {
     return {
       targetUser: null,
-      msgValue: ""
+      messageValue: "",
+      messageList: []
     };
   },
   methods: {
-    sendMsg() {}
+    sendMessage() {},
+    getMessage() {
+      this.$axios(`/api/chat/msg/${this.user.id}`).then(res => {
+        let result = res.data.filter(data => {
+          return data.target._id === this.targetUser._id;
+        });
+        console.log(result);
+        if (result.length > 0) {
+          this.messageList = result[0].message;
+        }
+      });
+    }
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.targetUser = to.params.user;
+      vm.getMessage();
     });
-  }
+  },
+  mounted() {}
 };
 </script>
 
@@ -77,36 +109,36 @@ export default {
   }
 }
 
-// .left_msg {
-//   justify-content: flex-start;
-// }
-// .right_msg {
-//   justify-content: flex-end;
-// }
-// .left_msg,
-// .right_msg {
-//   width: 100%;
-//   display: flex;
-//   margin: 5px 0;
-// }
-// .content_wrap img {
-//   width: 3rem;
-//   height: 3rem;
-// }
-// .content_wrap span {
-//   display: inline-block;
-//   max-width: 65%;
-//   border: 1px solid #d9d9d9;
-//   border-radius: 4px;
-//   margin: 0 5px;
-//   padding: 8px;
-//   box-sizing: border-box;
-//   word-break: break-all;
-// }
-// .left_msg span {
-//   background-color: #fff;
-// }
-// .right_msg span {
-//   background-color: #0fce0d;
-// }
+.left_msg {
+  justify-content: flex-start;
+}
+.right_msg {
+  justify-content: flex-end;
+}
+.left_msg,
+.right_msg {
+  width: 100%;
+  display: flex;
+  margin: 5px 0;
+}
+.content_wrap img {
+  width: 3rem;
+  height: 3rem;
+}
+.content_wrap span {
+  display: inline-block;
+  max-width: 65%;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  margin: 0 5px;
+  padding: 8px;
+  box-sizing: border-box;
+  word-break: break-all;
+}
+.left_msg span {
+  background-color: #fff;
+}
+.right_msg span {
+  background-color: #0fce0d;
+}
 </style>

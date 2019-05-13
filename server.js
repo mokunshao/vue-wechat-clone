@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const user = require("./routes/api/user");
 const User = require("./models/User");
-const Moment = require("./models/Moment");
 const moment = require("./routes/api/moment");
+const chat = require("./routes/api/chat");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
@@ -38,6 +38,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 
 app.use("/api/user", user);
 app.use("/api/moment", moment);
+app.use("/api/chat", chat);
 
 mongoose
   .connect(keys.mongoURI, { useNewUrlParser: true })
