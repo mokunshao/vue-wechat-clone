@@ -46,7 +46,6 @@ export default {
       let chatUser = this.chatDataList.filter(chatItem => {
         return chatItem.target._id === message.from;
       });
-      // 如果存在， count + 1 并将消息保存在列表中
       if (chatUser.length > 0) {
         chatUser[0].count++;
         chatUser[0].message.push({
@@ -59,12 +58,10 @@ export default {
           chatUser[0].message
         );
       } else {
-        // 如果不存在， 那么获取用户信息 并现实提醒
         this.getUserInfo(message);
       }
     },
     getUserInfo(message) {
-      // 根据id查询用户信息
       this.$axios(`/api/user/${message.from}`).then(res => {
         console.log(res.data);
         const msg = [];
@@ -72,14 +69,11 @@ export default {
           msg: message.msg,
           source: "other"
         });
-
-        // 将消息保存在聊天列表中 count为1
         this.chatDataList.push({
           target: res.data,
           count: 1,
           message: msg
         });
-
         this.saveMsg(res.data, 1, msg);
       });
     },
