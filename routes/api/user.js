@@ -118,7 +118,7 @@ router.get(
         }
         let usersObj = {};
         usersObj = {
-          name: user.name,
+          username: user.username,
           _id: user.id,
           email: user.email,
           avatar: user.avatar,

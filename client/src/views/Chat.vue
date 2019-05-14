@@ -1,6 +1,6 @@
 <template>
   <div class="chat" v-if="targetUser">
-    <Header :title="targetUser.username" :hasLeft="true" btnIcon="ellipsis-h" goBackTo="/contact"/>
+    <Header :title="targetUser.username" :hasLeft="true" btnIcon="ellipsis-h"/>
     <div class="container">
       <div class="content_wrap" v-for="(item,index) in messageList" :key="index">
         <div class="left_msg" v-if="item.source == 'other'">

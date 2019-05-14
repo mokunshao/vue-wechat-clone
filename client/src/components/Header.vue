@@ -2,7 +2,7 @@
   <header class="header">
     <div class="headerButton" v-if="hasLeft">
       <font-awesome-icon icon="chevron-left"/>
-      <button @click="$router.push(goBackTo)">返回</button>
+      <button @click="goBack">返回</button>
     </div>
     <div class="headerTitle">{{title}}</div>
     <div class="headerButton" v-if="btnIcon">
@@ -23,7 +23,16 @@ export default {
       default: false
     },
     btnIcon: String,
-    goBackTo: { type: String, default: "/" }
+    goBackTo: String
+  },
+  methods: {
+    goBack() {
+      if (this.goBackTo) {
+        this.$router.push(this.goBackTo);
+      } else {
+        this.$router.go(-1);
+      }
+    }
   }
 };
 </script>
