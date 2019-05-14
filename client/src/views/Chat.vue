@@ -144,36 +144,38 @@ export default {
   }
 }
 
-.left_msg {
-  justify-content: flex-start;
-}
-.right_msg {
-  justify-content: flex-end;
-}
-.left_msg,
-.right_msg {
-  width: 100%;
-  display: flex;
-  margin: 5px 0;
-}
-.content_wrap img {
-  width: 3rem;
-  height: 3rem;
-}
-.content_wrap span {
-  display: inline-block;
-  max-width: 65%;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  margin: 0 5px;
-  padding: 8px;
-  box-sizing: border-box;
-  word-break: break-all;
-}
-.left_msg span {
-  background-color: #fff;
-}
-.right_msg span {
-  background-color: #0fce0d;
+.content_wrap {
+  .left_msg {
+    justify-content: flex-start;
+    & span {
+      background-color: #fff;
+    }
+  }
+  .right_msg {
+    justify-content: flex-end;
+    & span {
+      background-color: #0fce0d;
+    }
+  }
+  .left_msg,
+  .right_msg {
+    width: 100%;
+    display: flex;
+    margin: 5px 0;
+  }
+  & img {
+    width: 3rem;
+    height: 3rem;
+  }
+  & span {
+    display: inline-block;
+    max-width: 65%;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    margin: 0 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    word-break: break-all;
+  }
 }
 </style>
