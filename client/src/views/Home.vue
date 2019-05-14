@@ -63,7 +63,6 @@ export default {
     },
     getUserInfo(message) {
       this.$axios(`/api/user/${message.from}`).then(res => {
-        console.log(res.data);
         const msg = [];
         msg.push({
           msg: message.msg,
