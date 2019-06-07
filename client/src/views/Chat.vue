@@ -1,7 +1,7 @@
 <template>
   <div class="chat" v-if="targetUser">
     <Header :title="targetUser.username" :hasLeft="true" btnIcon="ellipsis-h"/>
-    <div class="container">
+    <div class="container" ref="container">
       <div class="content_wrap" v-for="(item,index) in messageList" :key="index">
         <div class="left_msg" v-if="item.source === 'other'">
           <img :src="targetUser.avatar" alt="img">
@@ -41,6 +41,13 @@ export default {
       messageList: []
     };
   },
+  watch: {
+    messageList() {
+      this.$nextTick(() => {
+        this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
+      });
+    }
+  },
   methods: {
     saveMessage() {
       let message = {
@@ -72,14 +79,18 @@ export default {
       this.messageValue = "";
     },
     getMessage() {
-      this.$axios(`/api/chat/msg/${this.user.id}`).then(res => {
-        let result = res.data.filter(data => {
-          return data.target._id === this.targetUser._id;
+      if (this.targetUser) {
+        this.$axios(`/api/chat/msg/${this.user.id}`).then(res => {
+          let result = res.data.filter(data => {
+            return data.target._id === this.targetUser._id;
+          });
+          if (result.length > 0) {
+            this.messageList = result[0].message;
+            // 取消首页红点
+            this.saveMessage();
+          }
         });
-        if (result.length > 0) {
-          this.messageList = result[0].message;
-        }
-      });
+      }
     }
   },
   beforeRouteEnter(to, from, next) {

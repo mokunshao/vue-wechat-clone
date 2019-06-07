@@ -27,7 +27,7 @@ wsServer.on('connection', (websocket, req, res) => {
     socketSet.forEach(ws => {
       // console.log(ws);
       if (ws.websocket.readyState == 1) {
-        if (ws.currentId == msgObj.target) {
+        if (ws.currentId == msgObj.target&&msgObj.current!==msgObj.target) {
           // 判断当前用户是否为目标对象
           ws.websocket.send(
             JSON.stringify({

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="upload">
     <div class="isImg" v-for="(img,index) in showFileData" :key="index">
       <img :src="img" alt="img">
       <button class="remove" @click="removeImg(img)">x</button>
@@ -52,45 +52,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.isImg {
-  box-sizing: border-box;
-  width: 30%;
-  height: 5.5rem;
-  float: left;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  position: relative;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  .remove {
-    position: absolute;
-    top: -8px;
-    right: -5px;
-    border: none;
-    outline: none;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    text-align: center;
-    color: white;
-    background-color: #3baffd;
-    line-height: 10px;
-    border-radius: 50%;
-  }
-  .btn_upload {
-    width: 100%;
-    height: 100%;
-    outline: none;
-    border: none;
-    background: url(../assets/upload.png) no-repeat;
-    background-size: 100% 100%;
-    input {
-      display: inline-block;
+.upload {
+  .isImg {
+    box-sizing: border-box;
+    width: 30vw;
+    height: 30vw;
+    float: left;
+    margin-bottom: 1.4vw;
+    margin-right: 1.4vw;
+    margin-left: 1.4vw;
+    position: relative;
+    img {
       width: 100%;
       height: 100%;
-      opacity: 0;
+    }
+    .remove {
+      position: absolute;
+      top: -8px;
+      right: -5px;
+      border: none;
+      outline: none;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      text-align: center;
+      color: white;
+      background-color: #3baffd;
+      line-height: 10px;
+      border-radius: 50%;
+    }
+    .btn_upload {
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border: none;
+      background: url(../assets/upload.png) no-repeat;
+      background-size: 100% 100%;
+      input {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
     }
   }
 }

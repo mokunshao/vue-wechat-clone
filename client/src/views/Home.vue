@@ -87,9 +87,7 @@ export default {
         message: msg,
         user_id: this.user.id
       };
-      this.$axios.post("/api/chat/addmsg", messageObj).then(() => {
-        console.log("数据保存成功");
-      });
+      this.$axios.post("/api/chat/addmsg", messageObj)
     }
   },
   beforeRouteEnter(to, form, next) {

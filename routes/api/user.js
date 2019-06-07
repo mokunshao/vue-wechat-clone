@@ -93,7 +93,7 @@ router.get(
             _id: users[i]._id,
             email: users[i].email,
             avatar: users[i].avatar,
-            date: users[i].date
+            // date: users[i].date
           };
           newUsers.push(usersObj);
         }
@@ -110,7 +110,7 @@ router.get(
   (req, res) => {
     const errors = {};
     User.findOne({ _id: req.params.user_id })
-      .populate('user', ['name', 'avatar'])
+      // .populate('user', ['username', 'avatar'])
       .then(user => {
         if (!user) {
           errors.nouser = '未找到该用户信息';
@@ -119,10 +119,10 @@ router.get(
         let usersObj = {};
         usersObj = {
           username: user.username,
-          _id: user.id,
+          _id: user._id,
           email: user.email,
           avatar: user.avatar,
-          date: user.date
+          // date: user.date
         };
         res.json(usersObj);
       })

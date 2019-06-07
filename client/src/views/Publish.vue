@@ -86,9 +86,9 @@ export default {
     }
   }
   .content {
-    box-sizing: border-box;
-    padding: 16px;
     .text_wrap textarea {
+    box-sizing: border-box;
+      padding: 16px;
       width: 100%;
       font-size: 14px;
       min-height: 60px;
