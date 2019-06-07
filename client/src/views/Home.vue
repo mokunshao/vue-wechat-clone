@@ -36,9 +36,9 @@ export default {
       message => {
         this.setMessageCount(message);
       },
-      error => {
-        console.log(error);
-      }
+      // error => {
+        // console.log(error);
+      // }
     );
   },
   methods: {

@@ -11,7 +11,7 @@ wsServer.on('connection', (websocket, req, res) => {
   const userid = req.url.split('/');
   let isExist = false; // 标记当前用户是否在线
   socketSet.forEach(ws => {
-    if (ws.currentId == userid[2]) isExist = true;
+    if (ws.currentId === userid[2]) isExist = true;
   });
   if (!isExist) {
     socketSet.push({
@@ -26,8 +26,8 @@ wsServer.on('connection', (websocket, req, res) => {
     const msgObj = JSON.parse(message);
     socketSet.forEach(ws => {
       // console.log(ws);
-      if (ws.websocket.readyState == 1) {
-        if (ws.currentId == msgObj.target&&msgObj.current!==msgObj.target) {
+      if (ws.websocket.readyState === 1) {
+        if (ws.currentId === msgObj.target&&msgObj.current!==msgObj.target) {
           // 判断当前用户是否为目标对象
           ws.websocket.send(
             JSON.stringify({

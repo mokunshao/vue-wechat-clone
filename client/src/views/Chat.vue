@@ -60,9 +60,7 @@ export default {
         message: this.messageList,
         user_id: this.user.id
       };
-      this.$axios.post("/api/chat/addmsg", message).then(() => {
-        this.messageValue = "";
-      });
+      return this.$axios.post("/api/chat/addmsg", message);
     },
     sendMessage() {
       const msgObj = {
@@ -75,21 +73,25 @@ export default {
         msg: this.messageValue,
         source: "self"
       });
-      this.saveMessage();
-      this.messageValue = "";
+      this.saveMessage().then(() => {
+        this.messageValue = "";
+      });
     },
     getMessage() {
       if (this.targetUser) {
-        this.$axios(`/api/chat/msg/${this.user.id}`).then(res => {
-          let result = res.data.filter(data => {
-            return data.target._id === this.targetUser._id;
-          });
-          if (result.length > 0) {
-            this.messageList = result[0].message;
+        this.$axios(`/api/chat/msg/${this.user.id}`)
+          .then(res => {
+            let result = res.data.filter(data => {
+              return data.target._id === this.targetUser._id;
+            });
+            if (result.length > 0) {
+              this.messageList = result[0].message;
+            }
+          })
+          .then(() => {
             // 取消首页红点
             this.saveMessage();
-          }
-        });
+          });
       }
     }
   },
@@ -105,8 +107,8 @@ export default {
       message => {
         this.messageList.push({ msg: message.msg, source: "other" });
         this.saveMessage();
-      },
-      error => console.log(error)
+      }
+      // error => console.log(error)
     );
   }
 };
